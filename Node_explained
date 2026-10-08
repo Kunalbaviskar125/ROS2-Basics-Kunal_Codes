@@ -1,0 +1,55 @@
+#Import the ROS 2 Python client library.
+# rclpy gives Python programs the ability to communicate with ROS 2.
+import rclpy
+
+# Import the Node class from rclpy.
+# We will inherit from Node to create our own ROS 2 node.
+from rclpy.node import Node
+
+
+# Create our own node class.
+# "Mynode" inherits all the functionality of the ROS 2 Node class.
+class Mynode(Node):
+
+    # __init__() is the constructor.
+    # It runs automatically when we create an object of Mynode.
+    def __init__(self):
+
+        # Call the constructor of the parent Node class.
+        # "Ultron_is_Back" is the name of our ROS 2 node.
+        super().__init__("Ultron_is_Back")
+
+        # Get the logger associated with this node.
+        # .info() prints an informational message to the terminal.
+        self.get_logger().info("Hello World")
+
+
+# This is the main function of our ROS 2 program.
+# args=None means we can optionally pass command-line arguments.
+def main(args=None):
+
+    # Initialize the ROS 2 Python client library.
+    # This must happen before creating ROS 2 nodes.
+    rclpy.init(args=args)
+
+    # Create an object of our Mynode class.
+    # This causes __init__() to execute.
+    # Therefore "Hello World" will be printed.
+    node = Mynode()
+
+    # This line is commented out, so Python ignores it.
+    # If uncommented, it would print another message.
+    # node.get_logger().info("Camera Node Connected Securely")
+
+    # Keep the node alive and allow ROS 2 to process events.
+    # The program will remain here until the node is stopped.
+    rclpy.spin(node)
+
+    # Shut down the ROS 2 client library after spin() finishes.
+    rclpy.shutdown()
+
+
+# This checks whether this Python file is being run directly.
+# If it is, call the main() function.
+if __name__ == "__main__":
+    main()
